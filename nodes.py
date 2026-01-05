@@ -3,7 +3,7 @@ import gc
 import torch
 from comfy.patcher_extension import CallbacksMP
 from comfy.model_patcher import ModelPatcher
-from comfy.model_base import WAN21
+from comfy.model_base import WAN21, WAN22
 from tqdm import tqdm
 
 #Based on https://github.com/kijai/ComfyUI-WanVideoWrapper
@@ -20,23 +20,27 @@ class WanVideoBlockSwap:
             },
         }
     RETURN_TYPES = ("MODEL",)
-    CATEGORY = "ComfyUI-wanBlockswap"
+    CATEGORY = "ComfyUI_NativeBlockSwap"
     FUNCTION = "set_callback"
 
-    def set_callback(self, model: ModelPatcher, blocks_to_swap, offload_txt_emb, offload_img_emb, use_non_blocking):
-        
+    def set_callback(self, model: ModelPatcher, blocks_to_swap, offload_img_emb, offload_txt_emb, use_non_blocking):
+
         def swap_blocks(model: ModelPatcher, device_to, lowvram_model_memory, force_patch_weights, full_load):
             base_model = model.model
-            main_device=torch.device('cuda')
-            if isinstance(base_model, WAN21):
+            main_device = torch.device('cuda')
+
+            # Support both WAN21 and WAN22 models
+            if isinstance(base_model, (WAN21, WAN22)):
                 unet = base_model.diffusion_model
-            for b, block in tqdm(enumerate(unet.blocks), total=len(unet.blocks), desc="Initializing block swap"):
-                 
-                if b > blocks_to_swap:
-                    block.to(main_device)
-                else:
-                    block.to(model.offload_device)
-                        
+
+                # Swap blocks between main device and offload device
+                for b, block in tqdm(enumerate(unet.blocks), total=len(unet.blocks), desc="Initializing block swap"):
+                    if b > blocks_to_swap:
+                        block.to(main_device)
+                    else:
+                        block.to(model.offload_device)
+
+                # Offload embeddings (outside the loop, only once)
                 if offload_txt_emb:
                     unet.text_embedding.to(model.offload_device, non_blocking=use_non_blocking)
                 if offload_img_emb:
@@ -44,9 +48,9 @@ class WanVideoBlockSwap:
 
             comfy.model_management.soft_empty_cache()
             gc.collect()
-        
+
         model = model.clone()
-        model.add_callback(CallbacksMP.ON_LOAD,swap_blocks)
+        model.add_callback(CallbacksMP.ON_LOAD, swap_blocks)
 
         return (model, )
 

@@ -1,14 +1,14 @@
 [project]
-name = "wanblockswap"
-description = "This is a simple Wan block swap node for ComfyUI native nodes, works by swapping upto 40 blocks to the CPU to reduce VRAM."
+name = "ComfyUI_NativeBlockSwap"
+description = "Native block swap node for ComfyUI WAN models (2.1 & 2.2), reduces VRAM by swapping up to 40 transformer blocks to CPU."
 version = "1.0.0"
 license = {file = "LICENSE"}
 
 [project.urls]
-Repository = "https://github.com/orssorbit/ComfyUI-wanBlockswap"
+Repository = "https://github.com/lum3on/ComfyUI_NativeBlockSwap"
 #  Used by Comfy Registry https://comfyregistry.org
 
 [tool.comfy]
-PublisherId = "orssorbit"
-DisplayName = "ComfyUI-wanBlockswap"
+PublisherId = "lum3on"
+DisplayName = "ComfyUI_NativeBlockSwap"
 Icon = ""
