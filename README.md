@@ -16,7 +16,7 @@ cd ComfyUI_NativeBlockSwap
 python -m pip install -r requirements.txt
 ```
 
-Restart ComfyUI after installation. The node appears as `WanVideoBlockSwap` in the `ComfyUI_NativeBlockSwap` category.
+Restart ComfyUI after installation. The node appears as `native WanvideoBlockswap` in the `ComfyUI_NativeBlockSwap` category.
 
 **🎯 Usage:**
 
