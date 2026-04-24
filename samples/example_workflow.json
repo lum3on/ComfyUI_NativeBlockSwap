@@ -587,7 +587,7 @@
     },
     {
       "id": 94,
-      "type": "wanBlockSwap",
+      "type": "nativeWanVideoBlockSwap",
       "pos": [
         720.0398559570312,
         -24.69327735900879
@@ -617,7 +617,7 @@
         }
       ],
       "properties": {
-        "Node name for S&R": "wanBlockSwap"
+        "Node name for S&R": "nativeWanVideoBlockSwap"
       },
       "widgets_values": [
         20,
@@ -828,7 +828,7 @@
     "node_versions": {
       "ComfyUI-WanVideoKsampler": "e92a703670b6d2ed0748f3c25ae551e7e05d0ea8",
       "comfy-core": "0.3.26",
-      "ComfyUI-wanBlockswap": "unknown"
+      "ComfyUI_NativeBlockSwap": "unknown"
     },
     "VHS_latentpreview": true,
     "VHS_latentpreviewrate": 0,

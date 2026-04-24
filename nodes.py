@@ -55,9 +55,9 @@ class WanVideoBlockSwap:
         return (model, )
 
 NODE_CLASS_MAPPINGS = {
-    "wanBlockSwap": WanVideoBlockSwap
+    "nativeWanVideoBlockSwap": WanVideoBlockSwap
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "wanBlockSwap": "WanVideoBlockSwap"
+    "nativeWanVideoBlockSwap": "WanVideoBlockSwap"
 }

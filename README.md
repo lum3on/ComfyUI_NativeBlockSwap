@@ -12,7 +12,11 @@ Native block swap node for ComfyUI WAN models, reducing VRAM usage by swapping t
 ```bash
 cd ComfyUI/custom_nodes
 git clone https://github.com/lum3on/ComfyUI_NativeBlockSwap.git
+cd ComfyUI_NativeBlockSwap
+python -m pip install -r requirements.txt
 ```
+
+Restart ComfyUI after installation. The node appears as `WanVideoBlockSwap` in the `ComfyUI_NativeBlockSwap` category.
 
 **🎯 Usage:**
 
